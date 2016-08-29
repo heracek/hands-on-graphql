@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
+import { Grid, Row, Col, Nav, Navbar, Clearfix, PageHeader, Button } from 'react-bootstrap';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Navbar inverse fixedTop>
+          <Grid>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="/">SWpedia</a>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Nav>
+            </Nav>
+          </Grid>
+        </Navbar>
+        <Clearfix />
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <PageHeader>Welcome to SWpedia</PageHeader>
+              <p>
+                <Button
+                  href="http://react-bootstrap.github.io/components.html"
+                  target="_blank"
+                  bsStyle="primary"
+                >
+                  View React Bootstrap Docs
+                </Button>
+              </p>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }
