@@ -1,47 +1,26 @@
 import React, { Component } from 'react';
-import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import './App.css';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import { Grid, Row, Col, Nav, Navbar, Clearfix, PageHeader, Button } from 'react-bootstrap';
+import { About } from './components/About.js';
+import { AppIndex } from './components/AppIndex.js';
+import { AppWrapper } from './components/AppWrapper.js';
+import { NoMatch } from './components/NoMatch.js';
 
-class App extends Component {
+class AppRouter extends Component {
   render() {
     return (
-      <div className="App">
-        <Navbar inverse fixedTop>
-          <Grid>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">SWpedia</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Nav>
-            </Nav>
-          </Grid>
-        </Navbar>
-        <Clearfix />
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <PageHeader>Welcome to SWpedia</PageHeader>
-              <p>
-                <Button
-                  href="http://react-bootstrap.github.io/components.html"
-                  target="_blank"
-                  bsStyle="primary"
-                >
-                  View React Bootstrap Docs
-                </Button>
-              </p>
-            </Col>
-          </Row>
-        </Grid>
-      </div>
+      <Router history={browserHistory}>
+        <Route path="/" component={AppWrapper}>
+          <IndexRoute component={AppIndex}/>
+          <Route path="about" component={About}/>
+          <Route path="*" component={NoMatch}/>
+        </Route>
+      </Router>
     );
   }
 }
 
-export default App;
+export default AppRouter;
