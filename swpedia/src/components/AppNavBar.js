@@ -4,9 +4,17 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Grid, Nav, Navbar, NavItem } from 'react-bootstrap';
 
 export class AppNavBar extends Component {
+  renderLinkTo(title, to) {
+    return (
+      <LinkContainer to={to}>
+        <NavItem>{title}</NavItem>
+      </LinkContainer>
+    );
+  }
+
   render() {
     return (
-      <Navbar inverse fixedTop>
+      <Navbar fixedTop>
         <Grid>
           <Navbar.Header>
             <Navbar.Brand>
@@ -14,11 +22,15 @@ export class AppNavBar extends Component {
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
-          <Nav>
-            <LinkContainer to="/about">
-              <NavItem>About</NavItem>
-            </LinkContainer>
-          </Nav>
+          <Navbar.Collapse>
+            <Nav>
+              {this.renderLinkTo('Films', '/films')}
+              {this.renderLinkTo('Planets', '/planets')}
+            </Nav>
+            <Nav pullRight>
+              {this.renderLinkTo('About', '/about')}
+            </Nav>
+          </Navbar.Collapse>
         </Grid>
       </Navbar>
     );
