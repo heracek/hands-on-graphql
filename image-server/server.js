@@ -6,6 +6,12 @@ const IMAGE_SERVER_PORT = process.env.IMAGE_SERVER_PORT || 8004;
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/', (req, res) => {
   res.send(`
     <html>
