@@ -1,0 +1,23 @@
+{
+  "name": "image-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "watch": "nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015-node": "^6.1.1",
+    "babel-register": "^6.14.0",
+    "express": "^4.14.0",
+    "string-hash": "^1.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
