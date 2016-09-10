@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
         <h1>Image Server</h1>
         <h2>Planets<h2>
         <ul>
-          <li>Sample planet: <a href="/api/planet/PlanetName?water=45&rotation=0&size=250">/api/planets/PlanetName</a></li>
+          <li>Sample planet API: <a href="/api/planet/PlanetName?water=45&rotation=0&size=250">/api/planets/PlanetName</a></li>
           <li>Sample planet test with preview: <a href="/test/planet/PlanetName?water=45&rotation=0&size=250">/test/planets/PlanetName</a></li>
           <li>Original source: <a href="http://donjon.bin.sh/scifi/world/">http://donjon.bin.sh/scifi/world/</a></li>
         </ul>

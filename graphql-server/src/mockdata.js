@@ -32,6 +32,7 @@ const FILMS = [
     openingCrawl: "It is a dark time for the\r\nRebellion. Although the Death\r\nStar has been destroyed,\r\nImperial troops have driven the\r\nRebel forces from their hidden\r\nbase and pursued them across\r\nthe galaxy.\r\n\r\nEvading the dreaded Imperial\r\nStarfleet, a group of freedom\r\nfighters led by Luke Skywalker\r\nhas established a new secret\r\nbase on the remote ice world\r\nof Hoth.\r\n\r\nThe evil lord Darth Vader,\r\nobsessed with finding young\r\nSkywalker, has dispatched\r\nthousands of remote probes into\r\nthe far reaches of space....",
     director: 'Irvin Kershner',
     releaseDate: '1980-05-17',
+    planets: [2],
   },
 ];
 
@@ -46,12 +47,21 @@ const PLANETS = [
     films: [1],
   },
   {
+    id: 2,
+    name: 'Alderaan',
+    diameter: 12500,
+    climate: 'temperate',
+    surface_water: 40,
+    population: 2000000000,
+    films: [2],
+  },
+  {
     id: 3,
     name: 'Yavin IV',
-  	diameter: 10200,
-  	climate: 'temperate, tropical',
-  	surface_water: 8,
-  	population: 1000,
+    diameter: 10200,
+    climate: 'temperate, tropical',
+    surface_water: 8,
+    population: 1000,
     films: [1],
   },
 ];
