@@ -1,5 +1,21 @@
 export const getAllFilms = () => FILMS;
 export const getAllplanets = () => PLANETS;
+export const getPlanetById = (id) => findObejctById(PLANETS, id);
+export const getFilmById = (id) => findObejctById(FILMS, id);
+
+export function mapPlanetIdsToObjects(planetIds) {
+  if (!planetIds) { return null; }
+  return (planetIds || []).map(id => getPlanetById(id));
+};
+
+export function mapFilmIdsToObjects(filmIds) {
+  if (!filmIds) { return null; }
+  return filmIds.map(id => getFilmById(id));
+};
+
+function findObejctById(array, objectId) {
+  return array.find(object => object.id == objectId);
+};
 
 const FILMS = [
   {
