@@ -7,6 +7,10 @@ import { FilmsTable } from '../Films/FilmsTable.js';
 import { InfoList } from '../InfoList/InfoList.js';
 
 export class PlanetDetail extends Component {
+  static propTypes = {
+    planet: PropTypes.object.isRequired,
+  };
+
   render() {
     const { planet } = this.props;
     const safePlanet = planet || {};
