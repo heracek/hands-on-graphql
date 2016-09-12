@@ -3,27 +3,33 @@ import {
   GraphQLString,
   GraphQLList,
 } from 'graphql';
-
+import {
+  connectionArgs,
+  connectionFromArray,
+} from 'graphql-relay';
 import { getAllFilms, getAllplanets } from '../mockdata';
-import { Planet } from './planet';
 import { Film } from './film';
 
-const RootType = new GraphQLObjectType({
+export const RootType = new GraphQLObjectType({
   name: 'Root',
-  fields: {
-    planets: {
-      type: new GraphQLList(Planet),
-      resolve(obj) {
-        return getAllplanets();
+  fields: () => {
+    const { PlanetConnection } = require('./planet');
+    const { FilmConnection } = require('./film');
+    return {
+      planets: {
+        type: PlanetConnection,
+        args: connectionArgs,
+        resolve(obj, args) {
+          return connectionFromArray(getAllplanets(), args);
+        },
       },
-    },
-    films: {
-      type: new GraphQLList(Film),
-      resolve(obj) {
-        return getAllFilms();
+      films: {
+        type: FilmConnection,
+        args: connectionArgs,
+        resolve(obj, args) {
+          return connectionFromArray(getAllFilms(), args);
+        },
       },
-    },
+    }
   },
 });
-
-export default RootType;
