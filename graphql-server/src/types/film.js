@@ -8,7 +8,7 @@ import {
   globalIdField
 } from 'graphql-relay';
 
-import { mapPlanetIdsToObjects } from '../mockdata';
+import { mapPlanetIdsToObjects } from '../data';
 
 const FilmType = new GraphQLObjectType({
   name: 'Film',

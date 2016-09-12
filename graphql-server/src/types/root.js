@@ -7,7 +7,7 @@ import {
   connectionArgs,
   connectionFromArray,
 } from 'graphql-relay';
-import { getAllFilms, getAllplanets } from '../mockdata';
+import { getAllFilms, getAllPlanetsPromise } from '../data';
 
 export const RootType = new GraphQLObjectType({
   name: 'Root',
@@ -18,14 +18,15 @@ export const RootType = new GraphQLObjectType({
       planets: {
         type: new GraphQLList(PlanetType),
         resolve() {
-          return getAllplanets();
+          return getAllPlanetsPromise();
         },
       },
       planetsConnection: {
         type: PlanetConnection,
         args: connectionArgs,
-        resolve(obj, args) {
-          return connectionFromArray(getAllplanets(), args);
+        async resolve(obj, args) {
+          const allPlanets = await getAllPlanetsPromise();
+          return connectionFromArray(allPlanets, args);
         },
       },
       films: {

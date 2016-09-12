@@ -1,16 +1,18 @@
 import {
-  GraphQLObjectType,
-  GraphQLString,
+  GraphQLFloat,
   GraphQLInt,
   GraphQLList,
+  GraphQLObjectType,
+  GraphQLString,
 } from 'graphql';
 import {
   connectionDefinitions,
   globalIdField
 } from 'graphql-relay';
 
-import { mapFilmIdsToObjects } from '../mockdata';
+import { mapFilmIdsToObjects, swapiURLtoId } from '../data';
 import { nodeInterface } from '../node-definition';
+import { tryNumberResolver } from './helpers.js';
 
 const PlanetType = new GraphQLObjectType({
   name: 'Planet',
@@ -18,20 +20,27 @@ const PlanetType = new GraphQLObjectType({
     const { FilmType } = require('./film');
 
     return {
-      id: globalIdField(),
+      id: globalIdField(
+        PlanetType.name,
+        ({ url }) => swapiURLtoId(url)
+      ),
       rawId: {
         type: GraphQLInt,
-        resolve: ({ id }) => id,
+        resolve: ({ url }) => swapiURLtoId(url)
       },
       name: { type: GraphQLString },
-      population: { type: GraphQLInt },
       climate: { type: GraphQLString },
-      diameter: { type: GraphQLInt },
+      population: {
+        type: GraphQLFloat,
+        resolve: tryNumberResolver('population'),
+      },
+      diameter: {
+        type: GraphQLFloat,
+        resolve: tryNumberResolver('diameter'),
+      },
       surfaceWater: {
-        type: GraphQLInt,
-        resolve(obj) {
-          return obj.surface_water;
-        },
+        type: GraphQLFloat,
+        resolve: tryNumberResolver('surface_water'),
       },
       films: {
         type: new GraphQLList(FilmType),

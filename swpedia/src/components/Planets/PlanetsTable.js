@@ -19,8 +19,8 @@ export class PlanetsTable extends Component {
     return (
       <ItemsTable
         items={enhancedPlanets}
-        headers={['ID', 'Name', 'Films']}
-        columnKeys={['rawId', 'name', 'films']}
+        headers={['ID', 'Name', 'Population', 'Diameter']}
+        columnKeys={['rawId', 'name', 'population', 'diameter']}
         getLinkToItem={
           ({ id }) => `/planets/${id}`
         }
@@ -36,6 +36,8 @@ export const PlanetsTableContainer = Relay.createContainer(PlanetsTable, {
         id
         rawId
         name
+        population,
+        diameter,
         films {
           title
         }

@@ -3,7 +3,7 @@ import {
   nodeDefinitions,
 } from 'graphql-relay';
 
-import { getPlanetById } from './mockdata';
+import { getPlanetById } from './data';
 
 const __NODE_TYPE_KEY__ = '__NODE_TYPE_KEY__';
 
@@ -40,9 +40,9 @@ function resolveNodeData(globalId) {
   } = fromGlobalId(globalId);
 
   const getNodeById = getNodeByIdFunctions[nodeType] || (() => null);
-  return addNodeType(
-    getNodeById(nodeLocalId),
-    nodeType,
+
+  return getNodeById(nodeLocalId).then(
+    node => addNodeType(node, nodeType)
   );
 }
 

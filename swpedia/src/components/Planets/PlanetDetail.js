@@ -15,6 +15,7 @@ export class PlanetDetail extends Component {
     const { planet } = this.props;
     const safePlanet = planet || {};
     const { rawId, name, films } = safePlanet;
+    const safeFilms = films || [];
 
     const infoItems = [
       { key: 'population', header: 'Population'},
@@ -49,7 +50,7 @@ export class PlanetDetail extends Component {
             <Row>
               <Col xs={12}>
                 <h2>Films</h2>
-                <FilmsTable films={films}/>
+                <FilmsTable films={safeFilms}/>
               </Col>
             </Row>
           </Col>
