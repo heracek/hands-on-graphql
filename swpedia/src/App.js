@@ -12,7 +12,7 @@ import { AppWrapper } from './components/AppWrapper.js';
 import { FilmsPage } from './components/Pages/FilmsPage.js';
 import { FilmDetailPage } from './components/Pages/FilmDetailPage.js';
 import { NotFoundPage } from './components/Pages/NotFoundPage.js';
-import { PlanetDetailPage } from './components/Pages/PlanetDetailPage.js';
+import { PlanetDetailPageRenderer } from './components/Pages/PlanetDetailPage.js';
 import { PlanetsPageRenderer } from './components/Pages/PlanetsPage.js';
 
 Relay.injectNetworkLayer(
@@ -31,7 +31,7 @@ class AppRouter extends Component {
           </Route>
           <Route path="planets">
             <IndexRoute component={PlanetsPageRenderer}/>
-            <Route path=":planetId" component={PlanetDetailPage}/>
+            <Route path=":planetId" component={PlanetDetailPageRenderer}/>
           </Route>
           <Route path="about" component={AboutPage}/>
           <Route path="*" component={NotFoundPage}/>
