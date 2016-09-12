@@ -5,7 +5,9 @@ module.exports = {
   babelrc: false,
   // This is a feature of `babel-loader` for webpack (not Babel itself).
   // It enables caching results in OS temporary directory for faster rebuilds.
-  cacheDirectory: true,
+
+  cacheDirectory: false, // set to false for GraphQL/Relay (avoids problems with schema.json)
+
   presets: [
     // Latest stable ECMAScript features
     require.resolve('babel-preset-latest'),
@@ -13,6 +15,8 @@ module.exports = {
     require.resolve('babel-preset-react')
   ],
   plugins: [
+    require.resolve('babel-plugin-react-relay'),
+
     // class { handleClick = () => { } }
     require.resolve('babel-plugin-transform-class-properties'),
     // { ...todo, completed: true }

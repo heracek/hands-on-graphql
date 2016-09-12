@@ -10,6 +10,8 @@ module.exports = {
     require.resolve('babel-preset-react')
   ],
   plugins: [
+    require.resolve('babel-plugin-react-relay'),
+
     // class { handleClick = () => { } }
     require.resolve('babel-plugin-transform-class-properties'),
     // { ...todo, completed: true }

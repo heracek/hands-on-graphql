@@ -8,6 +8,7 @@
     "babel-eslint": "6.1.2",
     "babel-jest": "15.0.0",
     "babel-loader": "6.2.5",
+    "babel-plugin-react-relay": "^0.9.2-3",
     "babel-plugin-transform-class-properties": "6.11.5",
     "babel-plugin-transform-object-rest-spread": "6.8.0",
     "babel-plugin-transform-react-constant-elements": "6.9.1",
@@ -38,6 +39,7 @@
     "http-proxy-middleware": "0.17.1",
     "jest": "15.1.1",
     "json-loader": "0.5.4",
+    "nodemon": "^1.10.2",
     "object-assign": "4.1.0",
     "opn": "4.0.2",
     "path-exists": "3.0.0",
@@ -57,12 +59,14 @@
     "react": "^15.3.1",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.1",
+    "react-relay": "^0.9.3",
     "react-router": "^2.8.0",
     "react-router-bootstrap": "^0.23.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "watch": "nodemon --watch schema.json --exec npm start"
   },
   "eslintConfig": {
     "extends": "./config/eslint.js"
@@ -86,5 +90,8 @@
     ],
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
+  },
+  "graphql": {
+    "file": "./schema.json"
   }
 }

@@ -28,10 +28,10 @@ function getNodeAndType(nodeWithType) {
 }
 
 function resolveNodeData(globalId) {
-  const { PLANET_TYPE_NAME } = require('./types/planet.js');
+  const { PlanetType } = require('./types/planet.js');
 
   const getNodeByIdFunctions = {
-    [PLANET_TYPE_NAME]: getPlanetById,
+    [PlanetType.name]: getPlanetById,
   };
 
   const {
@@ -47,12 +47,12 @@ function resolveNodeData(globalId) {
 }
 
 function resolveNodeType(nodeWithType) {
-  const { Planet, PLANET_TYPE_NAME } = require('./types/planet');
+  const { PlanetType } = require('./types/planet');
 
   const { nodeType, node } = getNodeAndType(nodeWithType);
 
   return {
-    [PLANET_TYPE_NAME]: Planet,
+    [PlanetType.name]: PlanetType,
   }[nodeType];
 }
 

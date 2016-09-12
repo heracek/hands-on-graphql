@@ -12,15 +12,17 @@ import {
 import { mapFilmIdsToObjects } from '../mockdata';
 import { nodeInterface } from '../node-definition';
 
-const PLANET_TYPE_NAME = 'PlanetType';
-
-const Planet = new GraphQLObjectType({
-  name: PLANET_TYPE_NAME,
+const PlanetType = new GraphQLObjectType({
+  name: 'Planet',
   fields: () => {
-    const { Film } = require('./film');
+    const { FilmType } = require('./film');
 
     return {
       id: globalIdField(),
+      rawId: {
+        type: GraphQLInt,
+        resolve: ({ id }) => id,
+      },
       name: { type: GraphQLString },
       population: { type: GraphQLInt },
       climate: { type: GraphQLString },
@@ -32,7 +34,7 @@ const Planet = new GraphQLObjectType({
         },
       },
       films: {
-        type: new GraphQLList(Film),
+        type: new GraphQLList(FilmType),
         resolve(obj) {
           return mapFilmIdsToObjects(obj.films);
         },
@@ -42,9 +44,13 @@ const Planet = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
-const { connectionType: PlanetConnection } = connectionDefinitions({
-  name: PLANET_TYPE_NAME,
-  nodeType: Planet,
-});
 
-export { PLANET_TYPE_NAME, Planet, PlanetConnection };
+ const { connectionType: PlanetConnection } = connectionDefinitions({
+   nodeType: PlanetType,
+ });
+
+
+export {
+  PlanetType,
+  PlanetConnection,
+};

@@ -9,12 +9,11 @@ import {
 } from 'graphql-relay';
 
 import { mapPlanetIdsToObjects } from '../mockdata';
-const FILM_TYPE_NAME = 'FilmType';
 
-const Film = new GraphQLObjectType({
-  name: FILM_TYPE_NAME,
+const FilmType = new GraphQLObjectType({
+  name: 'Film',
   fields: () => {
-    const { Planet } = require('./planet');
+    const { PlanetType } = require('./planet');
 
     return {
       id: globalIdField(),
@@ -23,7 +22,7 @@ const Film = new GraphQLObjectType({
       openingCrawl: { type: GraphQLString },
       releaseDate: { type: GraphQLString },
       planets: {
-        type: new GraphQLList(Planet),
+        type: new GraphQLList(PlanetType),
         resolve(obj) {
           return mapPlanetIdsToObjects(obj.planets);
         },
@@ -33,8 +32,10 @@ const Film = new GraphQLObjectType({
  });
 
  const { connectionType: FilmConnection } = connectionDefinitions({
-   name: FILM_TYPE_NAME,
-   nodeType: Film,
+   nodeType: FilmType,
  });
 
- export { FILM_TYPE_NAME, Film, FilmConnection };
+ export {
+   FilmType,
+   FilmConnection,
+ };
