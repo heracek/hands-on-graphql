@@ -3,7 +3,7 @@ import Relay from 'react-relay';
 
 import { Col, Grid, Image, PageHeader, Row } from 'react-bootstrap';
 
-import { FilmsTable } from '../Films/FilmsTable.js';
+import { FilmsTableContainer } from '../Films/FilmsTable.js';
 import { InfoList } from '../InfoList/InfoList.js';
 
 export class PlanetDetail extends Component {
@@ -14,8 +14,7 @@ export class PlanetDetail extends Component {
   render() {
     const { planet } = this.props;
     const safePlanet = planet || {};
-    const { rawId, name, films } = safePlanet;
-    const safeFilms = films || [];
+    const { rawId, name, filmsConnection: films } = safePlanet;
 
     const infoItems = [
       { key: 'population', header: 'Population'},
@@ -50,7 +49,7 @@ export class PlanetDetail extends Component {
             <Row>
               <Col xs={12}>
                 <h2>Films</h2>
-                <FilmsTable films={safeFilms}/>
+                <FilmsTableContainer films={films}/>
               </Col>
             </Row>
           </Col>
@@ -73,12 +72,10 @@ export const PlanetDetailContainer = Relay.createContainer(PlanetDetail, {
         climate
         surfaceWater
 
-        films {
-          id
-          title
+        filmsConnection(first:100) {
+          ${FilmsTableContainer.getFragment('films')}
         }
       }
     `
   },
 });
-

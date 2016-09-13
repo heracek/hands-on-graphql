@@ -5,20 +5,16 @@ import { ItemsTable } from '../ItemsTable/ItemsTable.js';
 
 export class PlanetsTable extends Component {
   static propTypes = {
-    planets: PropTypes.array.isRequired,
+    planets: PropTypes.object.isRequired,
   };
 
   render() {
     const { planets } = this.props;
-    const safePlanets = planets || [];
-    const enhancedPlanets = safePlanets.map(planet => ({
-      ...planet,
-      films: (planet.films || []).map(({ title }) => title).join(', '),
-    }))
+    const safePlanetEdges = (planets || {}).edges || [];
 
     return (
       <ItemsTable
-        items={enhancedPlanets}
+        items={safePlanetEdges}
         headers={['ID', 'Name', 'Population', 'Diameter']}
         columnKeys={['rawId', 'name', 'population', 'diameter']}
         getLinkToItem={
@@ -32,14 +28,15 @@ export class PlanetsTable extends Component {
 export const PlanetsTableContainer = Relay.createContainer(PlanetsTable, {
   fragments: {
     planets: () => Relay.QL`
-      fragment on Planet @relay(plural: true) {
-        id
-        rawId
-        name
-        population,
-        diameter,
-        films {
-          title
+      fragment on PlanetConnection @relay(plural: false) {
+        edges {
+          node {
+            id
+            rawId
+            name
+            population
+            diameter
+          }
         }
       }
     `

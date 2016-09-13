@@ -12,7 +12,11 @@ import {
   globalIdField,
 } from 'graphql-relay';
 
-import { mapIdsToObjectsPromise, swapiURLtoId } from '../data';
+import {
+  mapIdsToObjectsPromise,
+  swapiURLtoId,
+  getAllFilmsPromise,
+} from '../data';
 import { nodeInterface } from '../node-definition';
 import { tryNumberResolver } from './helpers.js';
 

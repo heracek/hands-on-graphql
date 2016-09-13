@@ -1,20 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import Relay from 'react-relay';
 
 import { ItemsTable } from '../ItemsTable/ItemsTable.js';
 
-export class FilmsTable extends Component {
+class FilmsTable extends Component {
   static propTypes = {
-    films: PropTypes.array.isRequired,
+    films: PropTypes.object.isRequired,
   };
 
   render() {
     const { films } = this.props;
+    const { edges: filmEdges } = films;
 
     return (
       <ItemsTable
-        items={films}
+        items={filmEdges}
         headers={['ID', 'Title']}
-        columnKeys={['id', 'title']}
+        columnKeys={['rawId', 'title']}
         getLinkToItem={
           ({ id }) => `/films/${id}`
         }
@@ -22,3 +24,24 @@ export class FilmsTable extends Component {
     );
   }
 }
+
+export const FilmsTableContainer = Relay.createContainer(FilmsTable, {
+  fragments: {
+    films: () => Relay.QL`
+      fragment on FilmConnection @relay(plural: false) {
+        edges {
+          node {
+            id
+            rawId
+            title
+            planets {
+              id
+              rawId
+              name
+            }
+          }
+        }
+      }
+    `
+  },
+});

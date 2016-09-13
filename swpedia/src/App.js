@@ -9,8 +9,8 @@ import './App.css';
 import { AboutPage } from './components/Pages/AboutPage.js';
 import { HomePage } from './components/Pages/HomePage.js';
 import { AppWrapper } from './components/AppWrapper.js';
-import { FilmsPage } from './components/Pages/FilmsPage.js';
-import { FilmDetailPage } from './components/Pages/FilmDetailPage.js';
+import { FilmsPageRenderer } from './components/Pages/FilmsPage.js';
+import { FilmDetailPageRenderer } from './components/Pages/FilmDetailPage.js';
 import { NotFoundPage } from './components/Pages/NotFoundPage.js';
 import { PlanetDetailPageRenderer } from './components/Pages/PlanetDetailPage.js';
 import { PlanetsPageRenderer } from './components/Pages/PlanetsPage.js';
@@ -26,8 +26,8 @@ class AppRouter extends Component {
         <Route path="/" component={AppWrapper}>
           <IndexRoute component={HomePage}/>
           <Route path="films">
-            <IndexRoute component={FilmsPage}/>
-            <Route path=":filmId" component={FilmDetailPage}/>
+            <IndexRoute component={FilmsPageRenderer}/>
+            <Route path=":filmId" component={FilmDetailPageRenderer}/>
           </Route>
           <Route path="planets">
             <IndexRoute component={PlanetsPageRenderer}/>

@@ -30,8 +30,14 @@ const FilmType = new GraphQLObjectType({
       },
       title: { type: GraphQLString },
       director: { type: GraphQLString },
-      openingCrawl: { type: GraphQLString },
-      releaseDate: { type: GraphQLString },
+      openingCrawl: {
+        type: GraphQLString,
+        resolve: (obj) => obj.opening_crawl,
+      },
+      releaseDate: {
+        type: GraphQLString,
+        resolve: (obj) => obj.release_date,
+      },
       planets: {
         type: new GraphQLList(PlanetType),
         resolve({ planets }) {

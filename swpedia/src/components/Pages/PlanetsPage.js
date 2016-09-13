@@ -8,7 +8,7 @@ import { createDefaultRenderer } from '../DefaultRenderer';
 class PlanetsPage extends Component {
   render() {
     const { root } = this.props;
-    const { planets } = root || {};
+    const { planetsConnection: planets } = root || {};
 
     return (
       <div>
@@ -25,7 +25,7 @@ const PlanetsPageContainer = Relay.createContainer(PlanetsPage, {
   fragments: {
     root: () => Relay.QL`
       fragment on Root {
-        planets {
+        planetsConnection(first:100) {
           ${PlanetsTableContainer.getFragment('planets')}
         }
       }
