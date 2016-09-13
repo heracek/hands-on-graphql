@@ -1,10 +1,15 @@
 import fetch from 'node-fetch';
+import DataLoader from 'dataloader';
 
 const SWAPI_ENDPOINT = 'http://swapi.co/api';
 
 const swapiURLIdRegExp = new RegExp(/\/(\d+)\/$/);
 
 const CACHE = {};
+
+const swapiDataLoader = new DataLoader(fetchAllResultsFromSWAPIByURLArray, {
+  cache: true,
+});
 
 export function swapiURLtoId(url) {
   if (!url) { return null };
@@ -28,6 +33,20 @@ export async function fetchObjectFromSWAPIById(path, id) {
     swapiURLFromPath(`${path}/${id}`)
   );
   return data;
+}
+
+export async function cachedFetchObjectFromSWAPIById(path, id) {
+  return swapiDataLoader.load(swapiURLFromPath(`${path}/${id}`));
+}
+
+export function cachedFetchAllResultsFromSWAPIByURLArray(urlArray) {
+  return swapiDataLoader.loadMany(urlArray);
+}
+
+export function fetchAllResultsFromSWAPIByURLArray(urlArray) {
+  return Promise.all(urlArray.map(url =>
+    fetchJSONFromSWAPI(url)
+  ));
 }
 
 function swapiURLFromPath(path) {

@@ -7,13 +7,14 @@ import {
   connectionArgs,
   connectionFromArray,
 } from 'graphql-relay';
-import { getAllFilms, getAllPlanetsPromise } from '../data';
+import { getAllFilmsPromise, getAllPlanetsPromise } from '../data';
 
 export const RootType = new GraphQLObjectType({
   name: 'Root',
   fields: () => {
     const { PlanetType, PlanetConnection } = require('./planet');
     const { FilmType, FilmConnection } = require('./film');
+
     return {
       planets: {
         type: new GraphQLList(PlanetType),
@@ -32,14 +33,15 @@ export const RootType = new GraphQLObjectType({
       films: {
         type: new GraphQLList(FilmType),
         resolve() {
-          return getAllFilms();
+          return getAllFilmsPromise();
         },
       },
       filmsConnection: {
         type: FilmConnection,
         args: connectionArgs,
-        resolve(obj, args) {
-          return connectionFromArray(getAllFilms(), args);
+        async resolve(obj, args) {
+          const allFilms = await getAllFilmsPromise();
+          return connectionFromArray(allFilms, args);
         },
       },
     };

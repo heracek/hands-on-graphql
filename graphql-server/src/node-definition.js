@@ -3,7 +3,10 @@ import {
   nodeDefinitions,
 } from 'graphql-relay';
 
-import { getPlanetById } from './data';
+import {
+  getFilmPromiseById,
+  getPlanetPormiseById,
+} from './data';
 
 const __NODE_TYPE_KEY__ = '__NODE_TYPE_KEY__';
 
@@ -28,10 +31,12 @@ function getNodeAndType(nodeWithType) {
 }
 
 function resolveNodeData(globalId) {
+  const { FilmType } = require('./types/film.js');
   const { PlanetType } = require('./types/planet.js');
 
   const getNodeByIdFunctions = {
-    [PlanetType.name]: getPlanetById,
+    [FilmType.name]: getFilmPromiseById,
+    [PlanetType.name]: getPlanetPormiseById,
   };
 
   const {
@@ -47,11 +52,13 @@ function resolveNodeData(globalId) {
 }
 
 function resolveNodeType(nodeWithType) {
+  const { FilmType } = require('./types/film.js');
   const { PlanetType } = require('./types/planet');
 
   const { nodeType, node } = getNodeAndType(nodeWithType);
 
   return {
+    [FilmType.name]: FilmType,
     [PlanetType.name]: PlanetType,
   }[nodeType];
 }

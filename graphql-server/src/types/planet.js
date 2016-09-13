@@ -6,18 +6,20 @@ import {
   GraphQLString,
 } from 'graphql';
 import {
+  connectionArgs,
   connectionDefinitions,
-  globalIdField
+  connectionFromArray,
+  globalIdField,
 } from 'graphql-relay';
 
-import { mapFilmIdsToObjects, swapiURLtoId } from '../data';
+import { mapIdsToObjectsPromise, swapiURLtoId } from '../data';
 import { nodeInterface } from '../node-definition';
 import { tryNumberResolver } from './helpers.js';
 
 const PlanetType = new GraphQLObjectType({
   name: 'Planet',
   fields: () => {
-    const { FilmType } = require('./film');
+    const { FilmConnection, FilmType } = require('./film');
 
     return {
       id: globalIdField(
@@ -45,7 +47,15 @@ const PlanetType = new GraphQLObjectType({
       films: {
         type: new GraphQLList(FilmType),
         resolve(obj) {
-          return mapFilmIdsToObjects(obj.films);
+          return mapIdsToObjectsPromise(obj.films);
+        },
+      },
+      filmsConnection: {
+        type: FilmConnection,
+        args: connectionArgs,
+        async resolve(obj, args) {
+          const allFilms = await getAllFilmsPromise();
+          return connectionFromArray(allFilms, args);
         },
       },
     };
