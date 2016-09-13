@@ -13,9 +13,9 @@ import {
 } from 'graphql-relay';
 
 import {
+  imageForPlanet,
   mapIdsToObjectsPromise,
   swapiURLtoId,
-  getAllFilmsPromise,
 } from '../data';
 import { nodeInterface } from '../node-definition';
 import { tryNumberResolver } from './helpers.js';
@@ -24,6 +24,7 @@ const PlanetType = new GraphQLObjectType({
   name: 'Planet',
   fields: () => {
     const { FilmConnection, FilmType } = require('./film');
+    const { ImageType } = require('./image.js');
 
     return {
       id: globalIdField(
@@ -58,9 +59,17 @@ const PlanetType = new GraphQLObjectType({
         type: FilmConnection,
         args: connectionArgs,
         async resolve(obj, args) {
-          const allFilms = await getAllFilmsPromise();
+          const allFilms = await mapIdsToObjectsPromise(obj.films);
           return connectionFromArray(allFilms, args);
         },
+      },
+      image: {
+        type: ImageType,
+        args: {
+          size: { type: GraphQLInt },
+          rotation: { type: GraphQLInt },
+        },
+        resolve: imageForPlanet,
       },
     };
   },

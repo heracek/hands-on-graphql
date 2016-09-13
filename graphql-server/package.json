@@ -26,7 +26,8 @@
     "gulp": "^3.9.1",
     "gulp-graphql": "^0.2.0",
     "node-fetch": "^1.6.1",
-    "regenerator": "^0.8.46"
+    "regenerator": "^0.8.46",
+    "string-hash": "^1.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.10.2"
