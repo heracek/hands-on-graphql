@@ -7,8 +7,8 @@ import { createDefaultRenderer } from '../DefaultRenderer';
 
 class FilmsPage extends Component {
   render() {
-    const { root } = this.props;
-    const { filmsConnection: films } = root || {};
+    const { viewer } = this.props;
+    const { filmsConnection: films } = viewer || {};
 
     return (
       <div>
@@ -21,8 +21,8 @@ class FilmsPage extends Component {
 
 const FilmsPageContainer = Relay.createContainer(FilmsPage, {
   fragments: {
-    root: () => Relay.QL`
-      fragment on Root {
+    viewer: () => Relay.QL`
+      fragment on Viewer {
         filmsConnection(first:100){
           ${FilmsTableContainer.getFragment('films')}
         }
@@ -34,7 +34,7 @@ const FilmsPageContainer = Relay.createContainer(FilmsPage, {
 class FilmsRoute extends Relay.Route {
   static routeName = 'FilmsRoute';
   static queries = {
-    root: () => Relay.QL`query { root }`,
+    viewer: () => Relay.QL`query { viewer }`,
   };
 }
 

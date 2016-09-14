@@ -3,16 +3,16 @@ import {
   GraphQLSchema,
 } from 'graphql';
 
-import { RootType } from './types/root';
-import { nodeField } from './node-definition';
+import { ViewerType } from './types/viewer.js';
+import { nodeField } from './node-definition.js';
 
 export const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
       node: nodeField,
-      root: {
-        type: RootType,
+      viewer: {
+        type: ViewerType,
         resolve: () => ({}),
       },
     },

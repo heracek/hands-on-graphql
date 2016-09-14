@@ -40,12 +40,12 @@
               "deprecationReason": null
             },
             {
-              "name": "root",
+              "name": "viewer",
               "description": null,
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "Root",
+                "name": "Viewer",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -107,7 +107,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "Root",
+          "name": "Viewer",
           "description": null,
           "fields": [
             {

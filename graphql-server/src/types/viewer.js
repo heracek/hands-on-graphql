@@ -9,8 +9,8 @@ import {
 } from 'graphql-relay';
 import { getAllFilmsPromise, getAllPlanetsPromise } from '../data';
 
-export const RootType = new GraphQLObjectType({
-  name: 'Root',
+export const ViewerType = new GraphQLObjectType({
+  name: 'Viewer',
   fields: () => {
     const { PlanetType, PlanetConnection } = require('./planet');
     const { FilmType, FilmConnection } = require('./film');

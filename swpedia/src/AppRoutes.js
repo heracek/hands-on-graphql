@@ -19,7 +19,7 @@ Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer('http://localhost:8844/graphql')
 );
 
-class AppRouter extends Component {
+export class AppRoutes extends Component {
   render() {
     return (
       <Router history={browserHistory}>
@@ -40,5 +40,3 @@ class AppRouter extends Component {
     );
   }
 }
-
-export default AppRouter;

@@ -7,8 +7,8 @@ import { createDefaultRenderer } from '../DefaultRenderer';
 
 class PlanetsPage extends Component {
   render() {
-    const { root } = this.props;
-    const { planetsConnection: planets } = root || {};
+    const { viewer } = this.props;
+    const { planetsConnection: planets } = viewer || {};
 
     return (
       <div>
@@ -23,8 +23,8 @@ class PlanetsPage extends Component {
 
 const PlanetsPageContainer = Relay.createContainer(PlanetsPage, {
   fragments: {
-    root: () => Relay.QL`
-      fragment on Root {
+    viewer: () => Relay.QL`
+      fragment on Viewer {
         planetsConnection(first:100) {
           ${PlanetsTableContainer.getFragment('planets')}
         }
@@ -36,7 +36,7 @@ const PlanetsPageContainer = Relay.createContainer(PlanetsPage, {
 class PlanetsRoute extends Relay.Route {
   static routeName = 'PlanetsRoute';
   static queries = {
-    root: () => Relay.QL`query { root }`,
+    viewer: () => Relay.QL`query { viewer }`,
   };
 }
 
